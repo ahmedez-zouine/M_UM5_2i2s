@@ -1,7 +1,6 @@
+### Exercice 1 : Chiffrement de César
 
 ```
-- EX1
-
 1)
 gcc 1-chiffrement.c
 
