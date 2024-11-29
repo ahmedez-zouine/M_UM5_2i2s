@@ -3,23 +3,50 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char **argv)
+
+void do_chiffrement(int nb, char c, int *j)
 {
-	int len = strlen(argv[1]);
-	int i = 1;
-	char c = 'A';
-	while (i <= len)
+	if (c >= 'a' && c <= 'z')
 	{
-		char m = argv[1][i-1];
-		write(1, &m, 1);
-		if (i % 3 == 1)
-			c = ('A' - m + 'C') % 26;
-		else if (i % 3 == 2)
-			c = ('A' - m + 'C') % 26;
-		else if (i % 3 == 0)
-			c = ('A' - m + 'C') % 26;
-		i+= 1;
-		write(1, &c, 1);
+		c = ((c - 'a' + nb ) % 26 )+ 'a';
+		(*j)++;
 	}
-	write(1, "\n", 1);
+	else if (c >= 'A' && c <= 'Z')
+	{
+		c = ((c - 'A' + nb ) % 26) + 'A';
+		(*j)++;
+	}
+	write(1, &c , 1);
+}
+
+void ft_chiffrement_vgn(char *words, char *key)
+{
+	int i, j;
+	i = 0;
+	j = 0;
+
+	int len_words = strlen(words);
+	int len_key = strlen(key);
+	while (i < len_words)
+	{
+		char c = words[i];
+		char keychar = key[j % len_key];
+		//printf("\n------char get from key is %c--------\n",keychar);
+		int nbshifft = keychar - 'A';
+		do_chiffrement(nbshifft, c, &j);
+		i++;
+	}
+}
+
+int main() {
+    char plaintext[] = "MISSION SECRETE !@# 123";
+    char key[] = "CLE";
+
+    printf("Texte clair : %s\n", plaintext);
+    printf("key : %s\n", key);
+    printf("Texte chiffre : \n");
+    
+   ft_chiffrement_vgn(plaintext, key);
+
+    return 0;
 }
