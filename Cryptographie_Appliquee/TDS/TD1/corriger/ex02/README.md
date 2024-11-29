@@ -1,12 +1,11 @@
 ### Exercice 2 : Chiffrement de Vigenère
 
 ```
-1)
+# Run programme
 
+1 - 2)
 
-
-
-
-
+gcc 1-chiffrement
+./a.out
 
 ```
