@@ -1,34 +1,28 @@
-public class Main
-{
+package exo1;
 
-	public static void main(String[] args) {
-    	CompteBanque compte = new CompteBanque();
-    	int sold = compte.getSold();
-	System.out.println("sold now " + sold);
-	compte.setSold(101);
-	sold = compte.getSold();
-	System.out.println("sold is " + sold);
+public class Main {
+    public static void main(String[] args) {
+    CompteBanque compte = new CompteBanque(500);
+		
+		SanjiEtNamiJob Sanji =new SanjiEtNamiJob(compte,100);
+		SanjiEtNamiJob Nami = new SanjiEtNamiJob(compte,100);
+		
+		Thread SanjiT = new Thread(Sanji,"Sanji");
+		Thread NamiT = new Thread( Nami,"Nami");
 
+		SanjiT.start();
+		NamiT.start();
+		
+		try {
+			SanjiT.join(); 
+			NamiT.join();
 
-   	SanjiEtNamijob job1 = new SanjiEtNamijob(100, "Sanji");
-    	SanjiEtNamijob job2 = new SanjiEtNamijob(100, "Namij");
-
-    	job1.cmp = compte;
-    	job2.cmp = compte;
-
-    	Thread thread1 = new Thread(job1);
-    	Thread thread2 = new Thread(job2);
-
-    	thread1.start();
-    	thread2.start();
-
-    	try {
-        	thread1.join();
-       	 	thread2.join();
-    	} catch (InterruptedException e) {
-        e.printStackTrace();
-    	}
-
-    	System.out.println("Final balance: " + compte.getSold());
-	}
+        } catch (InterruptedException e) {
+        	System.out.println(Thread.currentThread().getName() + " interrupted. Exiting.");
+            return;
+        }
+		 System.out.println("* "+Thread.currentThread().getName()+" solde: "+Sanji.totalWithdrawn);
+		 System.out.println("* "+Thread.currentThread().getName()+" solde: "+Nami.totalWithdrawn);
+		 System.out.println("* compte solde: "+compte.getSolde());
+    }
 }

@@ -1,45 +1,45 @@
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.lang.Thread; 
+package exo1;
 
-public class SanjiEtNamijob implements Runnable
-{
-	CompteBanque cmp;
-	int sold;
-	String name;
-
-
-	private Lock lock = new ReentrantLock();
-	public SanjiEtNamijob(int sold, String name)
-	{
-		this.sold = sold;
-		this.name = name;
+public class SanjiEtNamiJob implements Runnable{
+	CompteBanque compte;
+	int ammountToWithdraw;
+	int totalWithdrawn;
+	
+	SanjiEtNamiJob(CompteBanque compte,int ammountToWithdraw){
+		this.compte = compte;
+		this.ammountToWithdraw = ammountToWithdraw;
 	}
-
-
-	void commandRetirer(int sold)
-	{
-		if (sold > 0 )
-		{
-			try {
-	 			Thread.sleep(1000);
-			} catch (InterruptedException ex)
-			{
-
+	
+	public void run() {
+		 demandeRetrait();
+	}
+	
+	 void demandeRetrait() {
+		while(true) {
+			
+			synchronized (compte) {	
+				if(compte.getSolde() >=  ammountToWithdraw) {
+					 System.out.println("- "+Thread.currentThread().getName()+" est sur le point de retirer"); 
+					 compte.retirer( ammountToWithdraw);
+					 totalWithdrawn +=  ammountToWithdraw;
+					 System.out.println("- "+Thread.currentThread().getName() + " à compléter le retrait de "+ ammountToWithdraw );
+				 }
+				 else {
+					 System.out.println("Pas assez d'argent pour "+Thread.currentThread().getName());
+					 break;
+				 }
 			}
-			cmp.retirer(sold);
+			
+			
+	
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+	
 		}
 	}
-
-	public void run()
-	{	
-		lock.lock();
-        	try
-		{
-			commandRetirer(sold);
-		} finally 
-		{
-            		lock.unlock();
-		}
-        }
+	
 }

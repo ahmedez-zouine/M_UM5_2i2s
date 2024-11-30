@@ -1,20 +1,18 @@
-public class CompteBanque
-{
-	private int sold;
+package exo1;
 
-	public int getSold()
-	{
-		return (this.sold);
+public class CompteBanque{
+	private int solde;
+	
+	CompteBanque(int solde){
+		this.solde = solde;
 	}
-
-	public void setSold(int sold)
-	{
-		this.sold = sold;
+	int getSolde() {
+		return this.solde;
 	}
-
-	public void retirer(int sold)
-	{
-		this.sold = this.sold - sold;
+	void setSolde(int montant) {
+		this.solde = montant;
+	}
+	void retirer(int montant) {
+		 this.solde -= montant;
 	}
 }
-
