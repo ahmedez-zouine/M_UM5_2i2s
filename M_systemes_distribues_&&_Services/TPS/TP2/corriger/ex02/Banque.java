@@ -20,13 +20,19 @@ public class Banque
         this.sold = sold;
     }
 
-    public double soldeTotal()
+    public double soldTotal()
     {
-        return 
+        return
     }
 
     int size()
     {
         return 
     }
+
+    void transferer(int from, int to, double sold)
+    {
+
+    }
 }
+
