@@ -23,7 +23,6 @@ public class BallFilling extends JFrame {
         currentRow = 0;
         currentCol = 0;
         
-        // Création du panel de dessin
         drawingPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -37,7 +36,6 @@ public class BallFilling extends JFrame {
         drawingPanel.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         drawingPanel.setBackground(Color.WHITE);
         
-        // Création du bouton Start
         startButton = new JButton("Start");
         startButton.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +48,6 @@ public class BallFilling extends JFrame {
             }
         });
         
-        // Layout
         setLayout(new BorderLayout());
         add(drawingPanel, BorderLayout.CENTER);
         add(startButton, BorderLayout.SOUTH);
@@ -65,17 +62,14 @@ public class BallFilling extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (currentRow * BALL_SIZE < PANEL_HEIGHT) {
                     if (currentCol * BALL_SIZE < PANEL_WIDTH) {
-                        // Ajouter une nouvelle balle
                         balls.add(new Point(currentCol * BALL_SIZE, currentRow * BALL_SIZE));
                         currentCol++;
                     } else {
-                        // Passer à la ligne suivante
                         currentCol = 0;
                         currentRow++;
                     }
                     drawingPanel.repaint();
                 } else {
-                    // Arrêter le timer quand le remplissage est terminé
                     ((Timer)e.getSource()).stop();
                     isRunning = false;
                     startButton.setEnabled(true);
