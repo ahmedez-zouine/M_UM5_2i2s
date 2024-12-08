@@ -1,38 +1,28 @@
-/*
-
-final double[] comptes  
-----------------------------------
-Banque (int, double)
-double soldeTotal()
-void transferer(in,int,double)
-int size()
----------------------------------
-*/
-
-public class Banque
-{
+class Banque {
     private final double[] comptes;
-    private int sold;
-
-    public Banque(int sold, double comptes)
-    {
-        this.comptes = comptes;
-        this.sold = sold;
+    
+    public Banque(int nbComptes, double soldeInitial) {
+        comptes = new double[nbComptes];
+        for (int i = 0; i < comptes.length; i++) {
+            comptes[i] = soldeInitial;
+        }
     }
-
-    public double soldTotal()
-    {
-        return
+    
+    public double soldeTotal() {
+        double total = 0;
+        for (double solde : comptes) {
+            total += solde;
+        }
+        return total;
     }
-
-    int size()
-    {
-        return 
+    
+    public void transferer(int de, int vers, double montant) {
+        if (comptes[de] < montant) return;
+        comptes[de] -= montant;
+        comptes[vers] += montant;
     }
-
-    void transferer(int from, int to, double sold)
-    {
-
+    
+    public int size() {
+        return comptes.length;
     }
 }
-
