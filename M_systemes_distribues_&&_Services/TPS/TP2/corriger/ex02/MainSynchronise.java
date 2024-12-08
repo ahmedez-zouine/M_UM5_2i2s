@@ -1,6 +1,5 @@
 public class MainSynchronise {
     public static void main(String[] args) {
-        System.out.println("Démarrage de la version synchronisée avec ReentrantLock");
         BanqueSynchronisee banque = new BanqueSynchronisee(100, 1000);
         
         System.out.println("Solde total initial: " + banque.soldeTotal() + " Dhs");
@@ -18,7 +17,7 @@ public class MainSynchronise {
                 System.out.println("Solde total actuel: " + soldeTotal + " Dhs");
                 
                 if (Math.abs(soldeTotal - 100000) > 0.01) {
-                    System.out.println("ATTENTION: Le solde total n'est plus égal à 100000 Dhs!");
+                    System.out.println("ATTENTION: Le solde total n'est plus egal à 100000 Dhs!");
                 }
                 
             } catch (InterruptedException e) {
