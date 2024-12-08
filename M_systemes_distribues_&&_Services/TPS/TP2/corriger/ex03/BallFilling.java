@@ -56,12 +56,16 @@ public class BallFilling extends JFrame {
         setLocationRelativeTo(null);
     }
     
-    private void startFilling() {
-        Timer timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (currentRow * BALL_SIZE < PANEL_HEIGHT) {
-                    if (currentCol * BALL_SIZE < PANEL_WIDTH) {
+    private void startFilling() 
+    {
+        Timer timer = new Timer(100, new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+                if (currentRow * BALL_SIZE < PANEL_HEIGHT) 
+                {
+                    if (currentCol * BALL_SIZE < PANEL_WIDTH) 
+                    {
                         balls.add(new Point(currentCol * BALL_SIZE, currentRow * BALL_SIZE));
                         currentCol++;
                     } else {
@@ -79,9 +83,12 @@ public class BallFilling extends JFrame {
         timer.start();
     }
     
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+    public static void main(String[] args) 
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run() 
+            {
                 new BallFilling().setVisible(true);
             }
         });
