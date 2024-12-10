@@ -1,16 +1,17 @@
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
 
-class BanqueSynchronisee {
+class BanqueSynchronisee 
+{
     private final double[] comptes;
     private final ReentrantLock lock = new ReentrantLock();
     private final Condition soldeDisponible = lock.newCondition();
     
-    public BanqueSynchronisee(int nbComptes, double soldeInitial) {
+    public BanqueSynchronisee(int nbComptes, double soldeInitial) 
+    {
         comptes = new double[nbComptes];
-        for (int i = 0; i < comptes.length; i++) {
+        for (int i = 0; i < comptes.length; i++)
             comptes[i] = soldeInitial;
-        }
     }
     
     public double soldeTotal() {
@@ -37,7 +38,8 @@ class BanqueSynchronisee {
             soldeDisponible.signalAll();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-        } finally {
+        } finally 
+        {
             lock.unlock();
         }
     }

@@ -10,6 +10,7 @@ public class MainSynchronise {
             t.setName("Thread-" + compte);
             t.start();
         }
+
         while (true) {
             try {
                 Thread.sleep(2000);
