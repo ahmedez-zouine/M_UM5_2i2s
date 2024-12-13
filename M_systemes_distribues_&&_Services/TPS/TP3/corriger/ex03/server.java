@@ -10,14 +10,13 @@ public class ChatServer {
         System.out.println("Chat server started...");
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             while (true) {
-                new ClientHandler(serverSocket.accept()).start();  // Handle each client in a new thread
+                new ClientHandler(serverSocket.accept()).start(); 
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // This class will handle each client connection
     private static class ClientHandler extends Thread {
         private Socket socket;
         private PrintWriter out;
@@ -33,13 +32,13 @@ public class ChatServer {
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 out = new PrintWriter(socket.getOutputStream(), true);
                 synchronized (clientWriters) {
-                    clientWriters.add(out);  // Add this client to the set of writers
+                    clientWriters.add(out);
                 }
 
                 String message;
                 while ((message = in.readLine()) != null) {
                     System.out.println("Received: " + message);
-                    broadcastMessage(message);  // Broadcast the message to all clients
+                    broadcastMessage(message);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -50,7 +49,7 @@ public class ChatServer {
                     e.printStackTrace();
                 }
                 synchronized (clientWriters) {
-                    clientWriters.remove(out);  // Remove client from the set when disconnected
+                    clientWriters.remove(out);
                 }
             }
         }
@@ -58,7 +57,7 @@ public class ChatServer {
         private void broadcastMessage(String message) {
             synchronized (clientWriters) {
                 for (PrintWriter writer : clientWriters) {
-                    writer.println(message);  // Send message to all connected clients
+                    writer.println(message);
                 }
             }
         }
