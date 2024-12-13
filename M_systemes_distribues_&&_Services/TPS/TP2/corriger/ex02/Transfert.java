@@ -10,7 +10,6 @@ class Transfert implements Runnable {
         this.compte = compte;
         this.montantMax = montantMax;
     }
-
     public void run() 
     {
         while (true) 
