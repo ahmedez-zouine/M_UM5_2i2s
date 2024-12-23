@@ -1,6 +1,5 @@
 def polybius_encrypt(plaintext):
     """Chiffre un texte clair en utilisant la grille de Polybe."""
-    # Grille de Polybe : 5x5 pour les lettres A-Z (I et J partagent une case)
     polybius_square = {
         'A': '11', 'B': '12', 'C': '13', 'D': '14', 'E': '15',
         'F': '21', 'G': '22', 'H': '23', 'I': '24', 'J': '24',
@@ -9,7 +8,6 @@ def polybius_encrypt(plaintext):
         'U': '45', 'V': '51', 'W': '52', 'X': '53', 'Y': '54', 'Z': '55'
     }
     
-    # Nettoyer le texte (enlever les caractères non alphabétiques et convertir en majuscules)
     plaintext = plaintext.replace(" ", "").upper()
 
     ciphertext = []
@@ -23,7 +21,6 @@ def polybius_encrypt(plaintext):
 
 def polybius_decrypt(ciphertext):
     """Déchiffre un texte chiffré en utilisant la grille de Polybe."""
-    # Grille de Polybe inversée : les paires de chiffres vers les lettres
     reverse_polybius_square = {
         '11': 'A', '12': 'B', '13': 'C', '14': 'D', '15': 'E',
         '21': 'F', '22': 'G', '23': 'H', '24': 'I', '24': 'J',  # I/J partagent la même case
@@ -47,18 +44,14 @@ def polybius_decrypt(ciphertext):
 def main():
     print("Chiffrement Polybe")
     
-    # Entrée du texte clair
     plaintext = input("Entrez le texte clair : ")
     
-    # Chiffrement
     ciphertext = polybius_encrypt(plaintext)
     print("Texte chiffré :", ciphertext)
     
-    # Déchiffrement
     decrypted_text = polybius_decrypt(ciphertext)
     print("Texte déchiffré :", decrypted_text)
 
 
-# Lancer le programme
 if __name__ == "__main__":
     main()

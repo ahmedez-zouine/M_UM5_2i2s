@@ -30,7 +30,6 @@ def vigenere_decrypt(ciphertext, key):
     
     return ''.join(plaintext)
 
-
 def main():
     print("Chiffrement et déchiffrement de Vigenère")
     
