@@ -36,15 +36,12 @@ public class Server {
             System.out.println("Player 2 connected");
             players[1] = new Player(player2Socket, "O", this);
             
-            // Start the game
             currentPlayer = players[0];
             gameStarted = true;
             
-            // Start player threads
             players[0].start();
             players[1].start();
             
-            // Notify both players that game has started
             broadcast("START|" + players[0].getMark());
             System.out.println("Game started");
             
@@ -56,16 +53,13 @@ public class Server {
     public boolean makeMove(int position, Player player) {
         gameLock.lock();
         try {
-            // Check if it's valid move
             if (!gameStarted || player != currentPlayer || position < 0 || position > 8 || !board[position].isEmpty()) {
                 return false;
             }
             
-            // Make the move
             board[position] = player.getMark();
             broadcast("MOVE|" + position + "|" + player.getMark());
             
-            // Check for win or draw
             if (checkWinner()) {
                 broadcast("WIN|" + player.getMark());
                 gameStarted = false;
@@ -78,7 +72,6 @@ public class Server {
                 return true;
             }
             
-            // Switch turns
             currentPlayer = (player == players[0]) ? players[1] : players[0];
             broadcast("TURN|" + currentPlayer.getMark());
             return true;
@@ -89,21 +82,18 @@ public class Server {
     }
     
     private boolean checkWinner() {
-        // Check rows
         for (int i = 0; i < 9; i += 3) {
             if (!board[i].isEmpty() && board[i].equals(board[i+1]) && board[i].equals(board[i+2])) {
                 return true;
             }
         }
         
-        // Check columns
         for (int i = 0; i < 3; i++) {
             if (!board[i].isEmpty() && board[i].equals(board[i+3]) && board[i].equals(board[i+6])) {
                 return true;
             }
         }
         
-        // Check diagonals
         if (!board[0].isEmpty() && board[0].equals(board[4]) && board[0].equals(board[8])) {
             return true;
         }
@@ -168,7 +158,7 @@ class Player extends Thread {
             out.println(message);
         }
     }
-    
+
     @Override
     public void run() {
         try {

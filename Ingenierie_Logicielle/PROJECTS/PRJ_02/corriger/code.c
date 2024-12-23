@@ -86,7 +86,6 @@ int uninitializedFunction() {
     return x + 10;  // x n'est pas initialisé
 }
 
-// Fonction avec pointeur null potentiel
 void nullPointerFunction(int* ptr) {
     *ptr = 42;  // Pas de vérification si ptr est NULL
 }
@@ -96,7 +95,7 @@ int main() {
     int* ptr;
     printf("%d\n", *ptr);
     
-    // Fuite de mémoire
+    // leaks de mémoire
     char* str = memoryLeakFunction();
     
     // Buffer overflow
