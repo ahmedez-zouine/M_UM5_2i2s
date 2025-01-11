@@ -1,5 +1,0 @@
-oodman: Hello Guys
-admin: Hello Goddman
-Azouine: i'm here admin
-goodman: i'm admin 
-admin: hhhh admin is here
