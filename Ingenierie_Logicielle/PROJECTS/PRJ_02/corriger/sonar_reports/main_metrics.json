@@ -1,0 +1,1 @@
+{"component":{"key":"calculator","name":"Calculator","qualifier":"TRK","measures":[{"metric":"coverage","value":"0.0","bestValue":false},{"metric":"complexity","value":"3"},{"metric":"duplicated_lines_density","value":"0.0","bestValue":true},{"metric":"ncloc","value":"13"},{"metric":"violations","value":"4","bestValue":false}]}}
